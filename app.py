@@ -1,5 +1,8 @@
+# --- 環境変数の読み込み ---
+# .envファイルから環境変数を読み込みます
 from dotenv import load_dotenv
 load_dotenv()
+
 # app.py
 import streamlit as st
 from langchain_openai import ChatOpenAI
@@ -41,7 +44,8 @@ def invoke_llm(user_input: str, expert_type: str) -> str:
     # LLMモデルを初期化
     # 環境変数 OPENAI_API_KEY が設定されている必要があります
     # Streamlit Community Cloudにデプロイする際は、Settings -> Secrets で設定してください
-    llm = ChatOpenAI(model="gpt-4.1-nano-2025-04-14", temperature=0.7)
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    llm = ChatOpenAI(openai_api_key=openai_api_key,model="gpt-4o-mini", temperature=0.7)
 
     # チェーンを作成し、LLMを呼び出す
     # promptにユーザーの入力テキストを渡します
