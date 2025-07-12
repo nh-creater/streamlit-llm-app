@@ -23,10 +23,10 @@ def invoke_llm(user_input: str, expert_type: str) -> str:
     """
     # 専門家タイプに応じたシステムメッセージを定義
     system_message = ""
-    if expert_type == "技術専門家":
-        system_message = "あなたは最先端の技術動向に精通した技術専門家です。質問に対して、技術的な観点から詳細かつ正確な情報を提供してください。"
-    elif expert_type == "ビジネス戦略家":
-        system_message = "あなたは市場分析と事業戦略の策定に長けたビジネス戦略家です。質問に対して、ビジネス的な視点から実用的で洞察に富んだアドバイスを提供してください。"
+    if expert_type == "子育て専門家":
+        system_message = "あなたは最先端の保育や教育に精通した子育ての専門家です。質問に対して、子どもの発達の観点から詳細かつ正確な情報を提供してください。"
+    elif expert_type == "健康の専門家":
+        system_message = "あなたは家庭でできる健康法の専門家です。質問に対して、適切な栄養や運動や睡眠の視点から実用的なアドバイスを提供してください。"
     else:
         # 未定義の専門家タイプが選択された場合のデフォルトまたはエラーハンドリング
         system_message = "あなたは一般的なアシスタントです。質問に対して、丁寧かつ分かりやすく回答してください。"
@@ -45,7 +45,7 @@ def invoke_llm(user_input: str, expert_type: str) -> str:
     # 環境変数 OPENAI_API_KEY が設定されている必要があります
     # Streamlit Community Cloudにデプロイする際は、Settings -> Secrets で設定してください
     openai_api_key = os.getenv("OPENAI_API_KEY")
-    llm = ChatOpenAI(openai_api_key=openai_api_key,model="gpt-4o-mini", temperature=0.7)
+    llm = ChatOpenAI(openai_api_key=openai_api_key, model="gpt-4o-mini", temperature=0.7)
 
     # チェーンを作成し、LLMを呼び出す
     # promptにユーザーの入力テキストを渡します
@@ -79,7 +79,7 @@ st.divider()
 st.subheader("1. 専門家を選択してください")
 expert_selection = st.radio(
     "LLMに振る舞わせる専門家を選んでください:",
-    ("技術専門家", "ビジネス戦略家"),
+    ("子育て専門家", "健康の専門家"),
     index=0, # デフォルトで「技術専門家」を選択
     key="expert_radio"
 )
@@ -88,7 +88,7 @@ st.subheader("2. 質問を入力してください")
 # 入力フォーム
 user_query = st.text_area(
     "ここに質問や相談内容を入力してください:",
-    placeholder="例: 量子コンピュータの最新の進展について教えてください。",
+    placeholder="例: 子どものおねしょの治し方を教えてください。",
     height=150,
     key="user_query_input"
 )
