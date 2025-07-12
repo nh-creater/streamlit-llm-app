@@ -1,6 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 # app.py
 import streamlit as st
 from langchain_openai import ChatOpenAI
