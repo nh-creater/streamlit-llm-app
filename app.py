@@ -41,7 +41,7 @@ def invoke_llm(user_input: str, expert_type: str) -> str:
     # LLMモデルを初期化
     # 環境変数 OPENAI_API_KEY が設定されている必要があります
     # Streamlit Community Cloudにデプロイする際は、Settings -> Secrets で設定してください
-    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.7)
+    llm = ChatOpenAI(model="gpt-4.1-nano-2025-04-14", temperature=0.7)
 
     # チェーンを作成し、LLMを呼び出す
     # promptにユーザーの入力テキストを渡します
